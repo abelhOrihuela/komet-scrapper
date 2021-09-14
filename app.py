@@ -22,7 +22,7 @@ def create_app():
     api = Api(app)
 
     scheduler = BackgroundScheduler()
-    scheduler.add_job(handle_cron, trigger="interval", seconds=30)
+    scheduler.add_job(handle_cron, trigger="interval", seconds=500)
     scheduler.start()
 
     db.init_app(app)
