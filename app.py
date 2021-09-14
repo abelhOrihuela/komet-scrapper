@@ -9,15 +9,9 @@ from lib.scrapper import main
 
 load_dotenv()
 
-def hello_job():
+def handle_cron():
     with app.app_context():
         main()
-
-
-class HelloWorld(Resource):
-    def get(self):
-        return {"hello": "world"}
-
 
 def create_app():
     app = Flask(__name__)
@@ -28,7 +22,7 @@ def create_app():
     api = Api(app)
 
     scheduler = BackgroundScheduler()
-    scheduler.add_job(hello_job, trigger="interval", seconds=500)
+    scheduler.add_job(handle_cron, trigger="interval", seconds=30)
     scheduler.start()
 
     db.init_app(app)
